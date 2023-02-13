@@ -1,0 +1,3 @@
+#!/bin/bash
+cat | tr '[:upper:]' '[:lower:]' | tr -s '[:space:]' '[\n*]' | sort | uniq -c | awk '$1 == 1 { print $2 }'
+
