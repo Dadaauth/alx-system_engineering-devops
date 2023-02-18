@@ -1,0 +1,2 @@
+#!/bin/bash
+echo $(awk "BEGIN {printf \"$POWER/$DIVIDE\n\"}")
