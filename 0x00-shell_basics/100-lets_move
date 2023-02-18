@@ -1,2 +1,2 @@
 #!/bin/bash
-for f in *; do [[ $f =~ ^[A-Z].* ]] && mv "$f" /tmp/u; done
+mv [A-Z]* /tmp/u/
