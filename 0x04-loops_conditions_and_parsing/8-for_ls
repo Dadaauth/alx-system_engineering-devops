@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# displays the content of the current directory
+# in a list format
+# only the part of the name after the first dash is displayed
+LIST="$(ls)"
+for file in $LIST;
+do
+	if [[ "$file" = *-* ]]; then
+		letters_after_dash="${file#*-}"
+		echo "$letters_after_dash"
+	else
+		echo "$file"
+	fi
+done
