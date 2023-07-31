@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+# init script to manage the manage_my_processs
+# DAEMON process
+pidfile=/var/run/my_process.pid
+start_daemon(){
+	./manage_my_process & 
+	sudo echo $! | sudo tee $pidfile > /dev/null
+}
+stop_daemon(){
+	kill "$(cat $pidfile)"
+	sudo rm $pidfile
+}
+if [[ $1 = "start" ]]; then
+	start_daemon
+	echo "manage_my_process started"
+elif [[ $1 = "stop" ]]; then
+	stop_daemon
+	echo "manage_my_process stopped"
+elif [[ $1 = "restart" ]]; then
+	stop_daemon
+	start_daemon
+	echo "manage_my_process restarted"
+else
+	echo "Usage: manage_my_process {start|stop|restart}"
+fi
