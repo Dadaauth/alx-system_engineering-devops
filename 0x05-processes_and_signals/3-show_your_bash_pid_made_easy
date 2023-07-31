@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# displays the PID along with the process name
+# of processes whose name contain the work bash
+pgrep -f bash | xargs  -I {} ps -o pid= -o comm= -p {}
