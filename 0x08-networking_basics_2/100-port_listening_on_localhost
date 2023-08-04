@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# creates a listening connection on port 98
+# on localhost
+sudo nc -lv 98
