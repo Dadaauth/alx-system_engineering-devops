@@ -1,4 +1,4 @@
 file { '/etc/ssh/ssh_config':
   ensure => 'present',
-  source => '2-ssh_config'
+  source => '/home/clement/alx-system_engineering-devops/0x0B-ssh/2-ssh_config'
 }
