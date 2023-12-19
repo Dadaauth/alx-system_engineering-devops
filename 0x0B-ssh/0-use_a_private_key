@@ -1,2 +1,3 @@
 #!/usr/bin/env bash
+# connects to a remote machine using ssh protocol
 ssh -i ~/.ssh/school ubuntu@100.25.164.42
