@@ -23,6 +23,7 @@ Host *
 #   ForwardX11 no
 #   ForwardX11Trusted yes
 #   PasswordAuthentication no
+    PasswordAuthentication no
 #   HostbasedAuthentication no
 #   GSSAPIAuthentication no
 #   GSSAPIDelegateCredentials no
@@ -33,7 +34,8 @@ Host *
 #   AddressFamily any
 #   ConnectTimeout 0
 #   StrictHostKeyChecking ask
-#   IdentityFile ~/.ssh/school
+#   IdentityFIle ~/.ssh/school
+    IdentityFile ~/.ssh/school
 #   IdentityFile ~/.ssh/id_rsa
 #   IdentityFile ~/.ssh/id_dsa
 #   IdentityFile ~/.ssh/id_ecdsa
