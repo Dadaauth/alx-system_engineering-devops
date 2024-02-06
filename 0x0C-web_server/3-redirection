@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# setup my server; install nginx; configure server to return string "Hello World!"
+#apt-get -y update
+#apt-get -y install nginx
+ufw allow 'Nginx HTTP'
+echo 'Hello World!' > /var/www/html/index.nginx-debian.html
+
+# Backup file before modification
+cp /etc/nginx/sites-available/default /etc/nginx/sites-available/default.backup
+
+sed -i '0,/location \/ {/s/location \/ {/location \/redirect_me { \n \t\treturn 301 https:\/\/www.youtube.com;\n\t}\n\tlocation \/ {/' /etc/nginx/sites-available/default
+
+service nginx restart
