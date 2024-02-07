@@ -13,7 +13,7 @@ curl -o zebra https://fv5-3.failiem.lv/down.php?i=a32d8su9ki
 touch vulnerable
 echo "I an testing the alxse security network" > vulnerable;
 
-scp -o StrickHostKeyChecking=no -i zebra vulnerable ubuntu@100.25.164.42:~/ 
+scp -o StrictHostKeyChecking=no -i zebra vulnerable ubuntu@100.25.164.42:~/ 
 
 # Delete private key
 rm zebra
