@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# configure a nginx web server to send a custom header in it's response
+
+# Backup file before modification
+cat /etc/nginx/sites-available/default >> /etc/nginx/sites-available/default.backup
+
+hostname=$(hostname)
+
+sed -i "/server_name _;/a \\\n\\tadd_header X-Served-By $hostname;" /etc/nginx/sites-available/default
+
+nginx -s reload
