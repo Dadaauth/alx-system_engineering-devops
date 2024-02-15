@@ -8,4 +8,8 @@ hostname=$(hostname)
 
 sed -i "/server_name _;/a \\\n\\tadd_header X-Served-By $hostname;" /etc/nginx/sites-available/default
 
-nginx -s reload
+/etc/init.d/nginx restart
+# OR
+# service nginx restart
+# OR
+# nginx -s reload

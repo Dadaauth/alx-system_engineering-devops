@@ -13,5 +13,7 @@ cp /etc/nginx/sites-available/default /etc/nginx/sites-available/default.backup
 sed -i '0,/location \/ {/s/location \/ {/location \/redirect_me { \n \t\treturn 301 https:\/\/www.youtube.com;\n\t}\n\tlocation \/ {/' /etc/nginx/sites-available/default
 
 /etc/init.d/nginx restart
-# or service nginx restart
-# or nginx -s reload
+# OR
+# service nginx restart
+# OR
+# nginx -s reload
