@@ -6,7 +6,7 @@ cat /etc/nginx/sites-available/default >> /etc/nginx/sites-available/default.bac
 
 hostname=$(hostname)
 
-sed -i "/server_name _;/a \\\n\\tadd_header X-Served-By $hostname;" /etc/nginx/sites-available/default
+sed -i "/server_name _;/a \\\n\\tadd_header X-Served-By $hostname ;" /etc/nginx/sites-available/default
 
 /etc/init.d/nginx restart
 # OR
