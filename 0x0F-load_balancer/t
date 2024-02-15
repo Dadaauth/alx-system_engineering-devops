@@ -4,9 +4,9 @@
 # Backup file before modification
 cat /etc/nginx/sites-available/default >> /etc/nginx/sites-available/default.backup
 
-mod_str="\"/server_name _;/a \\\n\\tadd_header X-Served-By $(hostname);\""
+mod_str="/server_name _;/a \\\n\\tadd_header X-Served-By $(hostname);"
 
-sed -i $mod_str /etc/nginx/sites-available/default
+sed -i "$mod_str" /etc/nginx/sites-available/default
 
 /etc/init.d/nginx restart
 # OR
