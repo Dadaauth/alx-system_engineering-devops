@@ -1,12 +1,26 @@
 #!/usr/bin/env bash
 # configure a nginx web server to send a custom header in it's response
 
+apt-get -y update;
+apt-get -y install nginx;
+ufw allow 'Nginx HTTP';
+echo 'Hello World!' > /var/www/html/index.nginx-debian.html;
+echo "Ceci n'est pas une page" > /var/www/html/404.html;
+
+
 # Backup file before modification
 cat /etc/nginx/sites-available/default >> /etc/nginx/sites-available/default.backup
 
+# Previous Task. (JUst to set up the server to the previous tasks requirements)
+sed -i '0,/location \/ {/s/location \/ {/location \/redirect_me { \n \t\treturn 301 https:\/\/www.youtube.com;\n\t}\n\tlocation \/ {/' /etc/nginx/sites-available/default
+
+sed -i '0,/location \/ {/s/location \/ {/error_page 404 \/404.html;\n\tlocation = \/404.html {\n\t\troot \/var\/www\/html;\n\t\tinternal;\n\t}\n\tlocation \/ {/' /etc/nginx/sites-available/default;
+
+
+# Real Task
 mod_str="/server_name _;/a \\\n\\tadd_header X-Served-By $(hostname);"
 
-sed -i $mod_str /etc/nginx/sites-available/default
+sed -i "$mod_str" /etc/nginx/sites-available/default
 
 /etc/init.d/nginx restart
 # OR
