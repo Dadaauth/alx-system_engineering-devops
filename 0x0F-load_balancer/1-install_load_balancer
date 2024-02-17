@@ -30,6 +30,7 @@ echo -e "\nbackend myservers\n\tbalance roundrobin cookie lb_cookie\n\tserver se
 # Configure HAproxy ~~~~~~~~~~~
 
 # ~~~~~~~~~~~~~~~~~ Restart HAproxy
-systemctl restart haproxy
+/etc/init.d/haproxy restart
+# systemctl restart haproxy
 # Restart HAproxy ~~~~~~~~~~~~~~~~~
 
