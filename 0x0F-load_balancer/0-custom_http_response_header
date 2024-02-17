@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 # configure a nginx web server to send a custom header in it's response
 
-# apt-get -y update;
-# apt-get -y install nginx;
-# ufw allow 'Nginx HTTP';
-# echo 'Hello World!' > /var/www/html/index.nginx-debian.html;
-# echo "Ceci n'est pas une page" > /var/www/html/404.html;
+apt-get -y update;
+apt-get -y install nginx;
+ufw allow 'Nginx HTTP';
+echo 'Hello World!' > /var/www/html/index.nginx-debian.html;
+echo "Ceci n'est pas une page" > /var/www/html/404.html;
 
 
 # Backup file before modification
