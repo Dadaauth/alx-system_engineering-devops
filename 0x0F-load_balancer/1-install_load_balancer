@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+# installs HaProxy on a new ubuntu server machine
+
+
+# ~~~~~~~~~~~ Installing HAproxy
+sudo apt install --no-install-recommends software-properties-common
+
+sudo add-apt-repository ppa:vbernat/haproxy-2.4 -y
+
+sudo apt install haproxy=2.4.\*
+
+sudo apt update && sudo apt upgrade -y
+
+# Installing HAproxy ~~~~~~~~~~~~
+
+
+# ~~~~~~~~~~~ Configure HAproxy
+# First configure Haproxy to have a frontend (frontend myfrontend
+#                                                       bind 0.0.0.0:80)
+# Create a backend which contains a list of servers. You can also create
+# a special case on the front end to determin which backend to route your requests to
+
+# Create a backup
+cp /etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.cfg.backup
+
+echo -e "\nfrontend frontend1\n\tbind 0.0.0.0:80" >> /etc/haproxy/haproxy.cfg
+echo -e "\tdefault_backend myservers" >> /etc/haproxy/haproxy.cfg
+echo -e "backend myservers\n\tserver server1 100.25.164.42 check\n\tserver server2 54.237.74.8 check" >> /etc/haproxy/haproxy.cfg
+
+# Configure HAproxy ~~~~~~~~~~~
+
+# ~~~~~~~~~~~~~~~~~ Restart HAproxy
+systemctl restart haproxy
+# Restart HAproxy ~~~~~~~~~~~~~~~~~
+
