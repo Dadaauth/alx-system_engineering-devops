@@ -18,7 +18,7 @@ sed -i '0,/location \/ {/s/location \/ {/error_page 404 \/404.html;\n\tlocation 
 
 
 # Real Task
-mod_str="/server_name _;/a \\\n\\tadd_header X-Served-By $(hostname);"
+mod_str="/location \/ {/a \\\n\\tadd_header X-Served-By $(hostname);"
 
 sed -i "$mod_str" /etc/nginx/sites-available/default
 
