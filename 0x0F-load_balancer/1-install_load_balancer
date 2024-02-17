@@ -25,7 +25,7 @@ cp /etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.cfg.backup
 
 echo -e "\nfrontend frontend1\n\tbind 0.0.0.0:80" >> /etc/haproxy/haproxy.cfg
 echo -e "\tdefault_backend myservers" >> /etc/haproxy/haproxy.cfg
-echo -e "backend myservers\n\tserver server1 100.25.164.42 check\n\tserver server2 54.237.74.8 check" >> /etc/haproxy/haproxy.cfg
+echo -e "\nbackend myservers\n\tserver server1 100.25.164.42:80 check\n\tserver server2 54.237.74.8:80 check" >> /etc/haproxy/haproxy.cfg
 
 # Configure HAproxy ~~~~~~~~~~~
 
