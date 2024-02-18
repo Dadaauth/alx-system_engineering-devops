@@ -32,7 +32,7 @@ echo -e "ENABLED=1" >> /etc/default/haproxy
 # Configure HAproxy ~~~~~~~~~~~
 
 # ~~~~~~~~~~~~~~~~~ Restart HAproxy
-/etc/init.d/haproxy restart
+service haproxy restart
 # systemctl restart haproxy
 # Restart HAproxy ~~~~~~~~~~~~~~~~~
 
