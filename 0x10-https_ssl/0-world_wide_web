@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# This is a bash script to retrieve information about a domain name
+
+dig_it () {
+	domain=$1
+	if [ -z "$domain" ]; then
+		exit 10
+	fi
+	if [ ! -z "$2" ]; then
+		subdomain=$2
+		result=$(dig "$subdomain.$domain" +noall +answer)
+		echo "$result" | awk -v subdomain="$subdomain" '{print "The subdomain " subdomain " is a " $4 " record and points to " $5}'
+	else
+		subds=("www" "lb-01" "web-01" "web-02")
+		declare -a results
+		for i in {0..3}
+		do
+			results[$i]=$(dig "${subds[$i]}.$domain" +noall +answer)
+			echo "${results[$i]}" | awk -v subdomain="${subds[$i]}" '{print "The subdomain " subdomain " is a " $4 " record and points to " $5}'
+		done
+	fi
+}
+
+dig_it $1 $2
