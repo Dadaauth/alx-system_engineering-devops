@@ -6,7 +6,7 @@ dig_it () {
 	if [ -z "$domain" ]; then
 		exit 10
 	fi
-	if [ ! -z "$2" ]; then
+	if [ -n "$2" ]; then
 		subdomain=$2
 		result=$(dig "$subdomain.$domain" +noall +answer)
 		echo "$result" | awk -v subdomain="$subdomain" '{print "The subdomain " subdomain " is a " $4 " record and points to " $5}'
@@ -21,4 +21,4 @@ dig_it () {
 	fi
 }
 
-dig_it $1 $2
+dig_it "$1" "$2"
