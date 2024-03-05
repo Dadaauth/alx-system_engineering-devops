@@ -2,9 +2,8 @@
 """
 A script to get data from an api
 """
-import sys
-
 import requests
+import sys
 
 
 def find_employee(user_id):
