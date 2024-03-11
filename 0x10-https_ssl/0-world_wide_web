@@ -1,24 +1,65 @@
 #!/usr/bin/env bash
 # This is a bash script to retrieve information about a domain name
 
-dig_it () {
-	domain=$1
-	if [ -z "$domain" ]; then
-		exit 10
-	fi
-	if [ -n "$2" ]; then
-		subdomain=$2
-		result=$(dig "$subdomain.$domain" +noall +answer)
-		echo "$result" | awk -v subdomain="$subdomain" '{print "The subdomain " subdomain " is a " $4 " record and points to " $5}'
-	else
-		subds=("www" "lb-01" "web-01" "web-02")
-		declare -a results
-		for i in {0..3}
-		do
-			results[$i]=$(dig "${subds[$i]}.$domain" +noall +answer)
-			echo "${results[$i]}" | awk -v subdomain="${subds[$i]}" '{print "The subdomain " subdomain " is a " $4 " record and points to " $5}'
-		done
-	fi
+# dig_it () {
+# 	domain=$1
+# 	if [ -z "$domain" ]; then
+# 		exit 10
+# 	fi
+# 	if [ -n "$2" ]; then
+# 		subdomain=$2
+# 		result=$(dig "$subdomain.$domain" A +noall +answer)
+# 		echo "$result"
+# 		fourth_word=$(echo "$result" | cut -d '	' -f 4)
+# 		echo "$fourth_word"
+# 		# if [[ "$fourth_word" == "A" ]]; then
+# 		# 	echo "$result" | awk -v subdomain="$subdomain" '{print "The subdomain " subdomain " is a " $4 " record and points to " $5}'
+# 		# fi
+# 	else
+# 		subds=("www" "lb-01" "web-01" "web-02")
+# 		declare -a results
+# 		for i in {0..3}
+# 		do
+# 			results[$i]=$(dig "${subds[$i]}.$domain" A +noall +answer)
+# 			echo ${results[$i]}
+# 			fourth_word=$(echo ${results[$i]} | cut -d ' ' -f 4)
+# 			echo $fourth_word
+# 			# if [[ "$fourth_word" == "A" ]]; then
+# 			# 	echo ${results[$i]} | awk -v subdomain="${subds[$i]}" '{print "The subdomain " subdomain " is a " $4 " record and points to " $5}'
+# 			# fi
+# 		done
+# 	fi
+# }
+
+# dig_it "$1" "$2"
+display_info() {
+  local subdomain="$1"
+  local record_type=$(dig +short -t A "$subdomain.$2" | head -n 1)
+  local destination=$(dig +short -t A "$subdomain.$2" | head -n 1)
+  if [[ -n "$record_type" ]]; then
+    echo "The subdomain $subdomain is a $record_type record and points to $destination"
+  else
+    echo "Subdomain $subdomain not found for domain $2"
+  fi
 }
 
-dig_it "$1" "$2"
+# Check arguments
+if [[ $# -eq 1 ]]; then
+  domain="$1"
+  # Display information for specific subdomains
+  display_info "www" "$domain"
+  display_info "lb-01" "$domain"
+  display_info "web-01" "$domain"
+  display_info "web-02" "$domain"
+elif [[ $# -eq 2 ]]; then
+  domain="$1"
+  subdomain="$2"
+  # Display information for specific subdomain provided
+  display_info "$subdomain" "$domain"
+else
+  echo "Usage: $0 <domain> [subdomain]"
+  exit 1
+fi
+
+# Ignore shellcheck SC2086 warning
+# shellcheck disable=SC2086
