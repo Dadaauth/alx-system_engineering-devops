@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 # CHanges the user nginx web server is run as
-kill $(ps auxff | pgrep nginx | head -n 1)
+kill "$(ps auxff | pgrep nginx | head -n 1)"
 sed -i '/user/s/.*/user nginx;/' /etc/nginx/nginx.conf
 service nginx restart
