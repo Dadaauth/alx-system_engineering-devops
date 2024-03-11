@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
 # Web stack debugging #1
-sudo apt install nginx
-nginx -s reload
+rm /etc/nginx/sites-enabled/default
+ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+service nginx restart
