@@ -34,7 +34,7 @@
 # dig_it "$1" "$2"
 display_info() {
   local subdomain="$1"
-  local record_type=$(dig +short -t A "$subdomain.$2" | head -n 1)
+  local record_type=$( dig  -t A "www.holberton.online" | grep 'www.holberton.online' | tail -n 1 | cut -d '	' -f 4)
   local destination=$(dig +short -t A "$subdomain.$2" | head -n 1)
   if [[ -n "$record_type" ]]; then
     echo "The subdomain $subdomain is a $record_type record and points to $destination"
