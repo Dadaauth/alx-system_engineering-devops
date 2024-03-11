@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
-# CHanges the user nginx web server is run as
-kill "$(ps auxff | pgrep nginx | head -n 1)"
+# Changes the user nginx web server is run as
+# kill "$(ps auxff | pgrep nginx | head -n 1)"
+pkill nginx
+chmod 644 /etc/nginx/nginx.conf
 sed -i '/user/s/.*/user nginx;/' /etc/nginx/nginx.conf
-service nginx restart
+su nginx -s /bin/bash -c 'service nginx restart'
