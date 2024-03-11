@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 # Run a command as another user in linux
-# su "$1" -c whoami
+su -s /bin/bash "$1" -c whoami
 # OR use
-
-runuser "$1" -c whoami
+# runuser "$1" -c whoami
