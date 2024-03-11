@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Web stack debugging #1
+sudo apt install nginx
+nginx -s reload
